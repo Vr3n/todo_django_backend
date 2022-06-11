@@ -277,3 +277,5 @@ todo_backend/media/
 .env
 .envs/*
 !.envs/.local/
+
+settings/local.py
