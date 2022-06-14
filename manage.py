@@ -6,7 +6,10 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'todo_backend.settings.local')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'todo_backend.settings.test')
+    if 'test' in sys.argv:
+        print("using tests")
+        os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'todo_backend.settings.local')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
