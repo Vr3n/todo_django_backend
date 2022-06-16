@@ -29,5 +29,6 @@ jobs:
         env:
           DEBUG: ${{ secrets.DEBUG }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          DJANGO_SETTINGS_MODULE: 'todo_backend.settings.ci'
         run: |
           python manage.py test
