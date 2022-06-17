@@ -37,9 +37,13 @@ class MobileNumbers(models.Model):
 
 
 class CustomUser(AbstractUser):
-    mobile_number = models.ForeignKey(
-        MobileNumbers, on_delete=models.DO_NOTHING)
-    email_id = models.ForeignKey(Emails, on_delete=models.DO_NOTHING)
+    mobile_number = models.CharField(_('Mobile Number'),
+                                     blank=True, null=True,
+                                     max_length=10, unique=True,
+                                     error_messages={
+        'unique': _("A user with that mobile_number already exists."),
+    }
+    )
 
     objects = CustomUserManager()
 
