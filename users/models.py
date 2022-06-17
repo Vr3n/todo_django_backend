@@ -1,21 +1,45 @@
-from django.conf import settings
-from django.utils import timezone
-from django.db import models, transaction
-from django.contrib.auth.models import AbstractUser
+from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractUser
 
 from users.managers import CustomUserManager
 
 
-class CustomUser(AbstractUser):
-    mobile_number = models.CharField(max_length=10, null=True, blank=True)
-    max_mobile_numbers = models.IntegerField(
-        default=2, verbose_name=_('max mobile number'), null=True, blank=True)
-    mobile_otp = models.CharField(max_length=6, null=True, blank=True)
-    email = models.EmailField(_('email address'), unique=True, error_messages={
+class Emails(models.Model):
+    email = models.EmailField(_('Email address'), unique=True, error_messages={
         'unique': _("A user with that email already exists."),
-        'required': _("Email id is required, please enter a valid email address.")
+        'required': _(
+            "Email id is required, please enter a valid email address.")
     })
+    is_primary = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f'{self.email} - {self.is_primary}'
+
+
+class MobileNumbers(models.Model):
+    mobile_number = models.CharField(_('Mobile Number'),
+                                     max_length=10, unique=True,
+                                     error_messages={
+        'unique': _("A user with that email already exists."),
+        'required': _(
+            "Email id is required, please enter a valid email address.")
+    }
+    )
+    is_primary = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f'{self.mobile_number} - {self.is_primary}'
+
+
+class CustomUser(AbstractUser):
+    mobile_number = models.ForeignKey(
+        MobileNumbers, on_delete=models.DO_NOTHING)
+    email_id = models.ForeignKey(Emails, on_delete=models.DO_NOTHING)
 
     objects = CustomUserManager()
 
