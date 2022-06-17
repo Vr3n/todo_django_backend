@@ -1,7 +1,0 @@
-# PostgreSQL
-# ------------------------------------------------------------------------------
-POSTGRES_HOST=postgres
-POSTGRES_PORT=5432
-POSTGRES_DB=todo_backend
-POSTGRES_USER=lJoLNJcJOxGVyQWqeJhjjmleTtMuxZOH
-POSTGRES_PASSWORD=DjYiw0UvmT3v32RSYDit2NuKFinPrGbBc4FV33T4NgqfWCfcg6oXsCnoPTel5jGN
