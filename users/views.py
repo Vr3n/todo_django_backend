@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.generics import CreateAPIView
 
 from users.serializers import UserRegisterSerializer
 
@@ -18,3 +19,10 @@ def register_user(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     return Response(serializer.data)
+
+
+class RegisterUserAPIView(CreateAPIView):
+    """
+    View to Register the New User.
+    """
+    serializer_class = UserRegisterSerializer

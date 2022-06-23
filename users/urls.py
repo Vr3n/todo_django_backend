@@ -1,7 +1,8 @@
-from django.urls import path
+from django.urls import path, include
 
-from users.views import register_user
+from users.views import RegisterUserAPIView
 
 urlpatterns = [
-    path('register/', register_user, name="api_register_user"),
+    path('register/', RegisterUserAPIView.as_view(), name="api_register_user"),
+    path('', include('dj_rest_auth.urls')),
 ]
