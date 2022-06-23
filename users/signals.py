@@ -3,6 +3,8 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
 
+from users.models import Profile
+
 User = get_user_model()
 
 
@@ -10,3 +12,9 @@ User = get_user_model()
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance=None, created=False, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)

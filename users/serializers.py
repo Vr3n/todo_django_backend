@@ -1,11 +1,20 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
+from users.models import Profile
 
 from users.validators import password_regex_validator
 
 from .utils import is_email_exists, is_mobile_exists
 
 User = get_user_model()
+
+
+class ReadOnlyModelSerializer(serializers.ModelSerializer):
+    def get_fields(self, *args, **kwargs):
+        fields = super().get_fields(*args, **kwargs)
+        for field in fields:
+            fields[field].read_only = True
+        return fields
 
 
 class UserLoginSerializer(serializers.Serializer):
@@ -83,3 +92,15 @@ class UserRegisterSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class ProfileSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = "__all__"
+
+
+class ReadOnlyProfileSerializer(ReadOnlyModelSerializer):
+    class Meta:
+        model = Profile
+        fields = "__all__"

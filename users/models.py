@@ -24,7 +24,8 @@ class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     profile_img = models.ImageField(
         upload_to="user/profile_img/", default='default_avatar.png')
-    about = models.TextField(verbose_name=_("About you"))
+    about = models.TextField(verbose_name=_(
+        "About you"), blank=True, null=True)
 
     def __str__(self) -> str:
-        return f"{self.user.first_name} - Profile"
+        return f"{self.user.email} - Profile"
