@@ -40,13 +40,11 @@ class RegisterUserAPIView(CreateAPIView):
 class ProfileRetrieveUpdateView(RetrieveUpdateAPIView):
     serializer_class = ProfileSerializers
     permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self):
-        return Profile.objects.filter(user=self.request.user)
+    queryset = Profile.objects.filter()
 
     def update(self, request, *args, **kwargs):
-        user = self.get_queryset()[0].user
-        if self.request.user != user:
+        user = self.kwargs['pk']
+        if self.request.user.id != user:
             return Response({"error": 'You cannot update this profile!'},
                             status=status.HTTP_403_FORBIDDEN)
         return super().update(request, *args, **kwargs)
