@@ -91,11 +91,16 @@ class RegisterUserTest(APITestCase):
 
         User = get_user_model()
 
-        user = User(username=self.valid_payload['username'],
-                    email=self.valid_payload['email'],
-                    mobile_number=self.valid_payload['mobile_number'],
-                    first_name="test",
-                    last_name="tset")
+        self.client.post(reverse_lazy('api_register_user'),
+                         self.valid_payload)
+
+        # user = User(username=self.valid_payload['username'],
+        #             email=self.valid_payload['email'],
+        #             mobile_number=self.valid_payload['mobile_number'],
+        #             first_name="test",
+        #             last_name="tset")
+
+        user = User.objects.get(email=self.valid_payload['email'])
 
         user.save()
 
@@ -111,13 +116,16 @@ class RegisterUserTest(APITestCase):
 
         User = get_user_model()
 
-        user = User(username=self.valid_payload['username'],
-                    email=self.valid_payload['email'],
-                    mobile_number=self.valid_payload['mobile_number'],
-                    first_name="test",
-                    last_name="tset")
+        self.client.post(reverse_lazy('api_register_user'),
+                         self.valid_payload)
 
-        user.save()
+        # user = User(username=self.valid_payload['username'],
+        #             email=self.valid_payload['email'],
+        #             mobile_number=self.valid_payload['mobile_number'],
+        #             first_name="test",
+        #             last_name="tset")
+
+        user = User.objects.get(email=self.valid_payload['email'])
 
         profile_obj = Profile.objects.get(user=user)
 
