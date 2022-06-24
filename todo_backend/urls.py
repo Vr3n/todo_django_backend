@@ -33,6 +33,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/accounts/', include('users.urls')),
+    path('api/', include('todos.urls')),
     re_path(r'^api/docs(?P<format>\.json|\.yaml)$',
             schema_view.without_ui(cache_timeout=0), name='schema-json'),
     re_path(r'^api/docs/$', schema_view.with_ui('swagger',
