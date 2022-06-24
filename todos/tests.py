@@ -87,7 +87,6 @@ class TodoAPITest(APITestCase):
 
         self.valid_todo_data['title'] = 'updated_title'
         self.valid_todo_data['description'] = 'updated_description'
-        print(self.valid_todo_data)
 
         update_res = self.c.put(
             reverse('todo-detail', kwargs={'pk': todo_obj.id}),

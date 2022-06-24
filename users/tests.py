@@ -100,7 +100,7 @@ class RegisterUserTest(APITestCase):
         #             first_name="test",
         #             last_name="tset")
 
-        user = User.objects.get(email=self.valid_payload)
+        user = User.objects.get(email=self.valid_payload['email'])
 
         user.save()
 
@@ -125,7 +125,7 @@ class RegisterUserTest(APITestCase):
         #             first_name="test",
         #             last_name="tset")
 
-        user = User.objects.get(email=self.valid_payload)
+        user = User.objects.get(email=self.valid_payload['email'])
 
         profile_obj = Profile.objects.get(user=user)
 
