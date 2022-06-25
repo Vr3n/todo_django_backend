@@ -11,7 +11,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-20.04
-    environment: CI
     services:
       postgres_main:
         image: postgres:12
