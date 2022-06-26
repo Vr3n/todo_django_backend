@@ -1,4 +1,4 @@
-name: Django Test CI
+name: CI - Django Tests
 
 on:
   workflow_call:
@@ -10,6 +10,7 @@ on:
 
 jobs:
   test:
+    environment: CI
     runs-on: ubuntu-20.04
     services:
       postgres_main:
