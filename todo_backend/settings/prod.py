@@ -4,7 +4,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['vtodos.heroku.com']
+ALLOWED_HOSTS = ['vtodos.herokuapp.com']
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
