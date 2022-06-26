@@ -1,2 +1,2 @@
 web: gunicorn todo_backend.wsgi
-release: python manage.py migrate
+release: sh -c "python manage.py makemigrations && python manage.py migrate"
